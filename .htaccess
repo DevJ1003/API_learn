@@ -1,1 +1,11 @@
 php_flag display_errors on
+
+ReWriteEngine On
+ReWriteCond %{REQUEST_FILENAME} !-d
+ReWriteCond %{REQUEST_FILENAME} !-f
+
+ReWriteRule ^tasks/([0-9]+)$ controller/task.php?taskid=$1 [L]
+ReWriteRule ^tasks/complete$ controller/task.php?completed=Y [L]
+ReWriteRule ^tasks/incomplete$ controller/task.php?completed=N [L]
+ReWriteRule ^tasks/page/([0-9]+)$ controller/task.php?page=$1 [L]
+ReWriteRule ^tasks$ controller/task.php [L]
